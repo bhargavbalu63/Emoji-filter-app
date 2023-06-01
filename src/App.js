@@ -1,23 +1,51 @@
-import logo from './logo.svg';
+
+import { useEffect, useState } from 'react';
 import './App.css';
 
+
 function App() {
+
+ const [state, setState]= useState([])
+const[search, setSearch]= useState("")
+
+
+
+ useEffect(() => {
+  const fetchData = async () => {
+    const response = await fetch(`https://emoji-api.com/emojis?search=${search}&access_key=a28cf11db34e56e7e63339e01a77919ff86d012c`);
+    const res = await response.json();
+    console.log(res);
+    setState(res);
+  };
+  fetchData();
+}, [search]);
+
   return (
+
+
+
+
+
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <h1>Emoji search</h1>
+  <input value={search} placeholder='type here....' onChange={(e)=>setSearch(e.target.value)} />
+
+
+    <div className='emojis'>
+    {state?.map((each, i)=>
+{
+  return(
+    <div className='eachemoji' key={i}>
+       {each.character}
+
+      </div>
+  )
+})}
+    </div>
+
+
+
     </div>
   );
 }
