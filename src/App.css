@@ -36,4 +36,16 @@ input{
   font-size: 30px;
   border: 0;
 }
+@media (max-width :525px)  {
+  input {
+  width: 320px;
+  font-size: 18px;
+  };
+}
+@media (max-width :345px)  {
+  input {
+  width: 180px;
+  font-size: 18px;
+  };
+}
 
